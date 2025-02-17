@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  accuknox-scan: accuknox-scan/accuknox-test-scan@dev:1.113
+  accuknox-scan: accuknox-scan/accuknox-test-scan@dev:1.114
 workflows:
   accuknox:
     jobs:
