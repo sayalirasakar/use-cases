@@ -1,12 +1,19 @@
 version: 2.1
+orbs:
+  accuknox-scan: accuknox-scan/accuknox-test-scan@dev:1.120
+workflows:
+  accuknox:
+    jobs:
+      - accuknox-scan/sast:
+          INPUT_SOFT_FAIL: false
+          SKIP_SONAR_SCAN: true
+      - print-env
 
 jobs:
-  build:
+  print-env:
     docker:
-      - image: cimg/node:17.0
-    environment:
-      CIRCLE_COMPARE_URL: << pipeline.project.git_url >>/compare/<< pipeline.git.base_revision >>..<<pipeline.git.revision>>
-    working_directory: ~/main
+      - image: cimg/base:stable
     steps:
-      - run: echo "This is pipeline ID << pipeline.id >>"
-      - run: echo $CIRCLE_COMPARE_URL
+      - run:
+          name: Print Environment Variables
+          command: printenv
