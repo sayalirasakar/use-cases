@@ -1,9 +1,10 @@
 version: 2.1
 orbs:
-  accuknox-scan: accuknox-scan/accuknox-test-scan@dev:1.125
+  accuknox-scan: accuknox-scan/accuknox-test-scan@dev:1.126
 workflows:
   accuknox:
     jobs:
       - accuknox-scan/sast:
           INPUT_SOFT_FAIL: false
           SKIP_SONAR_SCAN: true
+          REPOSITORY_URL: << pipeline.project.git_url >>
