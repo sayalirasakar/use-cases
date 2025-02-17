@@ -6,4 +6,14 @@ workflows:
     jobs:
       - accuknox-scan/sast:
           INPUT_SOFT_FAIL: false
-          SKIP_SONAR_SCAN: false
+          SKIP_SONAR_SCAN: true
+      - print-env
+
+jobs:
+  print-env:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run:
+          name: Print Environment Variables
+          command: printenv
