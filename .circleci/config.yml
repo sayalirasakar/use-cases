@@ -1,7 +1,13 @@
 version: 2.1
+
 jobs:
   build:
     docker:
-      - image: circleci/node
+      - image: cimg/node:20.3.0
+    environment:
+      CIRCLE_COMPARE_URL: << pipeline.project.git_url >>/compare/<< pipeline.git.base_revision >>..<<pipeline.git.revision>>
+    working_directory: ~/main
     steps:
-      - run: env | sort
+      - run: echo "This is pipeline ID << pipeline.id >>"
+      - run: echo "This is pipeline ID << pipeline.project.git_url >>"
+      - run: echo $CIRCLE_COMPARE_URL
