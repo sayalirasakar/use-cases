@@ -8,6 +8,6 @@ jobs:
       CIRCLE_COMPARE_URL: << pipeline.project.git_url >>/compare/<< pipeline.git.base_revision >>..<<pipeline.git.revision>>
     working_directory: ~/main
     steps:
-      - run: echo "This is pipeline ID << pipeline.id >>"
-      - run: echo "This is pipeline ID << pipeline.project.git_url >>"
-      - run: echo $CIRCLE_COMPARE_URL
+      - run: |
+          CIRCLE_REPOSITORY_URL="<< pipeline.project.git_url >>"
+          echo $CIRCLE_REPOSITORY_URL
