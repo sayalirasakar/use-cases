@@ -44,7 +44,7 @@ jobs:
           LABEL: "SPOC"
         run: |
           set +e
-          cat results.json
+          cat results.json | jq
           curl --silent --show-error --fail --location \
             --request POST "https://${END_POINT}/api/v1/artifact/?tenant_id=${TENANT_ID}&data_type=SG&label_id=${LABEL}&save_to_s3=true" \
             --header "Tenant-Id: ${TENANT_ID}" \
