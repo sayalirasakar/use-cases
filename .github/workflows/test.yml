@@ -32,6 +32,7 @@ jobs:
             -e JOB_URL="$JOB_URL" \
             safeeraccuknox/demo:opengreptest-1.2
           echo "OPENGREP_EXIT_CODE=$?" >> $GITHUB_ENV
+          echo "OPENGREP_EXIT_CODE_V1=$OPENGREP_EXIT_CODE"
 
       - name: Push report to CSPM panel
         shell: bash
@@ -49,6 +50,7 @@ jobs:
             --header "Authorization: Bearer ${TOKEN}" \
             --form 'file=@"results.json"'
           echo "AK_EXIT_CODE=$?" >> $GITHUB_ENV
+          echo "AK_EXIT_CODE_V1=$AK_EXIT_CODE"
 
       - name: Fail pipeline if scan fails
         run: |
@@ -61,6 +63,8 @@ jobs:
             fi
           fi
 
+          echo "OPENGREP_EXIT_CODE_V2=$OPENGREP_EXIT_CODE"
+          echo "AK_EXIT_CODE_V2=$AK_EXIT_CODE"
           echo "FINAL_EXIT_CODE=$FINAL_EXIT_CODE"
 
           if [ "$FINAL_EXIT_CODE" -ne 0 ]; then
