@@ -7,37 +7,40 @@ on:
   pull_request:
     branches:
       - opengrep-test
+
 env:
-  INPUT_SOFT_FAIL: false
+  INPUT_SOFT_FAIL: "false"
 
 jobs:
   accuknox-cicd:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@main
+        uses: actions/checkout@v3
 
-    - name: opengreptest
-      run: |
-        set +e  # Allow commands to fail without stopping the script
-        docker run --rm -ti -v $PWD:/app safeeraccuknox/demo:opengreptest-1.1
-        OPENGREP_EXIT_CODE=$?
-        echo "OPENGREP_EXIT_CODE=$OPENGREP_EXIT_CODE" >> $GITHUB_ENV
+      - name: Run OpenGrep Test
+        run: |
+          set +e  # Allow commands to fail without stopping the script
+          docker run --rm -v "$PWD:/app" safeeraccuknox/demo:opengreptest-1.1
+          echo "OPENGREP_EXIT_CODE=$?" >> $GITHUB_ENV
 
-    - name: Push report to CSPM panel
-      shell: bash
-      env:
-        END_POINT: "cspm.dev.accuknox.com"
-        TENANT_ID: ${{ secrets.DEV_TENANT_ID }}
-        TOKEN: ${{ secrets.DEV_TOKEN }}
-      run: |
-        set +e  # Allow commands to fail without stopping the script
-        curl --silent --show-error --fail --location --request POST "https://${END_POINT}/api/v1/artifact/?tenant_id=${TENANT_ID}&data_type=TR&label_id=${LABEL}&save_to_s3=true" --header "Tenant-Id: ${TENANT_ID}" --header "Authorization: Bearer ${TOKEN}" --form 'file=@"results.json"'
-        AK_EXIT_CODE=$?
-        echo "AK_EXIT_CODE=$AK_EXIT_CODE" >> $GITHUB_ENV
+      - name: Push report to CSPM panel
+        shell: bash
+        env:
+          END_POINT: "cspm.dev.accuknox.com"
+          TENANT_ID: "${{ secrets.DEV_TENANT_ID }}"
+          TOKEN: "${{ secrets.DEV_TOKEN }}"
+        run: |
+          set +e
+          curl --silent --show-error --fail --location \
+            --request POST "https://${END_POINT}/api/v1/artifact/?tenant_id=${TENANT_ID}&data_type=TR&label_id=${LABEL}&save_to_s3=true" \
+            --header "Tenant-Id: ${TENANT_ID}" \
+            --header "Authorization: Bearer ${TOKEN}" \
+            --form 'file=@"results.json"'
+          echo "AK_EXIT_CODE=$?" >> $GITHUB_ENV
 
-    - name:  Failing pipeline if scan failed
-      run: |
+      - name: Fail pipeline if scan fails
+        run: |
           FINAL_EXIT_CODE=0
 
           if [ "$OPENGREP_EXIT_CODE" -ne 0 ] || [ "$AK_EXIT_CODE" -ne 0 ]; then
@@ -47,7 +50,7 @@ jobs:
             fi
           fi
 
-          echo "FINAL_EXIT_CODE = $FINAL_EXIT_CODE"
+          echo "FINAL_EXIT_CODE=$FINAL_EXIT_CODE"
 
           if [ "$FINAL_EXIT_CODE" -ne 0 ]; then
             if [ "$INPUT_SOFT_FAIL" = "true" ]; then
