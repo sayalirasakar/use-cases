@@ -30,7 +30,7 @@ jobs:
             -e COMMIT_REF="$COMMIT_REF" \
             -e PIPELINE_ID="$PIPELINE_ID" \
             -e JOB_URL="$JOB_URL" \
-            safeeraccuknox/demo:opengreptest-1.6
+            safeeraccuknox/demo:opengreptest-1.7
           export OPENGREP_EXIT_CODE=$?
           echo "OPENGREP_EXIT_CODE=$OPENGREP_EXIT_CODE" >> $GITHUB_ENV
           echo "OPENGREP_EXIT_CODE_V1=$OPENGREP_EXIT_CODE"
