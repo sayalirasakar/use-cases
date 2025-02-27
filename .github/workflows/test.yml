@@ -30,7 +30,7 @@ jobs:
             -e COMMIT_REF="$COMMIT_REF" \
             -e PIPELINE_ID="$PIPELINE_ID" \
             -e JOB_URL="$JOB_URL" \
-            safeeraccuknox/demo:opengreptest-1.1
+            safeeraccuknox/demo:opengreptest-1.2
           echo "OPENGREP_EXIT_CODE=$?" >> $GITHUB_ENV
 
       - name: Push report to CSPM panel
@@ -39,11 +39,12 @@ jobs:
           END_POINT: "cspm.dev.accuknox.com"
           TENANT_ID: "${{ secrets.DEV_TENANT_ID }}"
           TOKEN: "${{ secrets.DEV_TOKEN }}"
+          LABEL: "SPOC"
         run: |
           set +e
           cat results.json
           curl --silent --show-error --fail --location \
-            --request POST "https://${END_POINT}/api/v1/artifact/?tenant_id=${TENANT_ID}&data_type=TR&label_id=${LABEL}&save_to_s3=true" \
+            --request POST "https://${END_POINT}/api/v1/artifact/?tenant_id=${TENANT_ID}&data_type=SG&label_id=${LABEL}&save_to_s3=true" \
             --header "Tenant-Id: ${TENANT_ID}" \
             --header "Authorization: Bearer ${TOKEN}" \
             --form 'file=@"results.json"'
