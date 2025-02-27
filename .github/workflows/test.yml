@@ -30,8 +30,9 @@ jobs:
             -e COMMIT_REF="$COMMIT_REF" \
             -e PIPELINE_ID="$PIPELINE_ID" \
             -e JOB_URL="$JOB_URL" \
-            safeeraccuknox/demo:opengreptest-1.3
-          echo "OPENGREP_EXIT_CODE=$?" >> $GITHUB_ENV
+            safeeraccuknox/demo:opengreptest-1.4
+          export OPENGREP_EXIT_CODE=$?
+          echo "OPENGREP_EXIT_CODE=OPENGREP_EXIT_CODE" >> $GITHUB_ENV
           echo "OPENGREP_EXIT_CODE_V1=$OPENGREP_EXIT_CODE"
 
       - name: Push report to CSPM panel
@@ -49,7 +50,8 @@ jobs:
             --header "Tenant-Id: ${TENANT_ID}" \
             --header "Authorization: Bearer ${TOKEN}" \
             --form 'file=@"results.json"'
-          echo "AK_EXIT_CODE=$?" >> $GITHUB_ENV
+          export AK_EXIT_CODE=$?
+          echo "AK_EXIT_CODE=AK_EXIT_CODE" >> $GITHUB_ENV
           echo "AK_EXIT_CODE_V1=$AK_EXIT_CODE"
 
       - name: Fail pipeline if scan fails
