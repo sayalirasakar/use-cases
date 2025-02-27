@@ -19,9 +19,18 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run OpenGrep Test
+        env:
+          PIPELINE_ID: "${{ github.run_id }}"
+          JOB_URL: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
         run: |
           set +e  # Allow commands to fail without stopping the script
-          docker run --rm -v "$PWD:/app" safeeraccuknox/demo:opengreptest-1.1
+          docker run --rm -v "$PWD:/app" \
+            -e REPOSITORY_URL="$REPOSITORY_URL" \
+            -e COMMIT_SHA="$COMMIT_SHA" \
+            -e COMMIT_REF="$COMMIT_REF" \
+            -e PIPELINE_ID="$PIPELINE_ID" \
+            -e JOB_URL="$JOB_URL" \
+            safeeraccuknox/demo:opengreptest-1.1
           echo "OPENGREP_EXIT_CODE=$?" >> $GITHUB_ENV
 
       - name: Push report to CSPM panel
@@ -32,6 +41,7 @@ jobs:
           TOKEN: "${{ secrets.DEV_TOKEN }}"
         run: |
           set +e
+          cat results.json
           curl --silent --show-error --fail --location \
             --request POST "https://${END_POINT}/api/v1/artifact/?tenant_id=${TENANT_ID}&data_type=TR&label_id=${LABEL}&save_to_s3=true" \
             --header "Tenant-Id: ${TENANT_ID}" \
