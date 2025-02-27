@@ -32,7 +32,7 @@ jobs:
             -e JOB_URL="$JOB_URL" \
             safeeraccuknox/demo:opengreptest-1.6
           export OPENGREP_EXIT_CODE=$?
-          echo "OPENGREP_EXIT_CODE=OPENGREP_EXIT_CODE" >> $GITHUB_ENV
+          echo "OPENGREP_EXIT_CODE=$OPENGREP_EXIT_CODE" >> $GITHUB_ENV
           echo "OPENGREP_EXIT_CODE_V1=$OPENGREP_EXIT_CODE"
 
       - name: Push report to CSPM panel
