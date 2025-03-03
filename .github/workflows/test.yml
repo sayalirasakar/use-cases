@@ -25,3 +25,4 @@ jobs:
           ACCUKNOX_TENANT: "${{ secrets.DEV_TENANT_ID }}"
           ACCUKNOX_TOKEN: "${{ secrets.DEV_TOKEN }}"
           ACCUKNOX_LABEL: "SPOC"
+          INPUT_SOFT_FAIL: "true"
