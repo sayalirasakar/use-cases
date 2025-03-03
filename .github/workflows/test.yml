@@ -18,8 +18,8 @@ jobs:
       - name: Run OpenGrep
         uses: safeer-accuknox/opengrep-action@1.0.2
         with:
-          accuknox_endpoint: "cspm.dev.accuknox.com"
-          accuknox_tenant: "${{ secrets.DEV_TENANT_ID }}"
-          accuknox_token: "${{ secrets.DEV_TOKEN }}"
+          accuknox_endpoint: "cspm.stage.accuknox.com"
+          accuknox_tenant: "${{ secrets.STAGE_TENANT_ID }}"
+          accuknox_token: "${{ secrets.STAGE_TOKEN }}"
           accuknox_label: "SPOC"
           input_soft_fail: "true"
