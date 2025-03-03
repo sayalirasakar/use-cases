@@ -21,7 +21,7 @@ jobs:
       - name: Run OpenGrep
         uses: safeer-accuknox/opengrep-action@1.0.1
         with:
-          END_POINT: "cspm.dev.accuknox.com"
-          TENANT_ID: "${{ secrets.DEV_TENANT_ID }}"
-          TOKEN: "${{ secrets.DEV_TOKEN }}"
-          LABEL: "SPOC"
+          ACCUKNOX_ENDPOINT: "cspm.dev.accuknox.com"
+          ACCUKNOX_TENANT: "${{ secrets.DEV_TENANT_ID }}"
+          ACCUKNOX_TOKEN: "${{ secrets.DEV_TOKEN }}"
+          ACCUKNOX_LABEL: "SPOC"
