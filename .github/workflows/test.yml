@@ -23,4 +23,4 @@ jobs:
           accuknox_token: "${{ secrets.STAGE_TOKEN }}"
           accuknox_label: "SPOC"
           input_soft_fail: "true"
-          upload_artifact: true
+          upload_artifact: false
