@@ -15,10 +15,10 @@ jobs:
       - name: Run AccuKnox DAST Scan
         uses: accuknox/dast-scan-action@v1.0.0
         with:
-          target_url: "https://api.gwclogistics.com"
-          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
-          tenant_id: ${{ secrets.ACCUKNOX_POC_TENANT }}
-          accuknox_token: ${{ secrets.ACCUKNOX_POC_TOKEN }}
+          target_url: "http://testphp.vulnweb.com/"
+          accuknox_endpoint: "cspm.demo.accuknox.com"
+          tenant_id: 3730
+          accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
           label: "AKDAST"
           severity_threshold: "High"
-          scan_type: "full-scan"
+          scan_type: "baseline"
