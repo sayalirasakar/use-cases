@@ -19,6 +19,6 @@ jobs:
           accuknox_endpoint: "cspm.demo.accuknox.com"
           tenant_id: 3730
           accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
-          label: "AKDAST"
+          label: "SPOC"
           severity_threshold: "High"
           scan_type: "baseline"
