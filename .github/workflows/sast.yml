@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run AccuKnox SAST
-        uses: accuknox/sast-scan-action@v1.0.0
+        uses: accuknox/sast-scan-action@sq-findings-enrichment
         with:
           sonar_token: ${{ secrets.SONAR_TOKEN }}
           sonar_host_url: "https://sq.accuknox.com"
