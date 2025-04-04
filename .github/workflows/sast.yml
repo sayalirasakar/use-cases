@@ -21,8 +21,8 @@ jobs:
           sonar_token: ${{ secrets.SONAR_TOKEN }}
           sonar_host_url: "https://sq.accuknox.com"
           sonar_project_key: "spoc_test1"
-          accuknox_endpoint: "cspm.demo.accuknox.com"
-          tenant_id: 3730
-          accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          accuknox_endpoint: "cspm.dev.accuknox.com"
+          tenant_id: 19
+          accuknox_token: ${{ secrets.ACCUKNOX_DEV_TOKEN }}
           label: "SPOC"
           input_soft_fail: true
