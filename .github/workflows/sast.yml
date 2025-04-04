@@ -27,4 +27,4 @@ jobs:
           accuknox_token: ${{ secrets.ACCUKNOX_DEV_TOKEN }}
           label: "SPOC"
           input_soft_fail: false
-          skip_sonar_scan: true
+          skip_sonar_scan: false
