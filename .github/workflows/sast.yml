@@ -25,5 +25,5 @@ jobs:
           tenant_id: 19
           accuknox_token: ${{ secrets.ACCUKNOX_DEV_TOKEN }}
           label: "SPOC"
-          input_soft_fail: true
+          input_soft_fail: false
           skip_sonar_scan: true
