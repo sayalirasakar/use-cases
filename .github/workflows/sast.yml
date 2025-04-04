@@ -19,8 +19,9 @@ jobs:
         uses: accuknox/sast-scan-action@sq-findings-enrichment
         with:
           sonar_token: ${{ secrets.SONAR_TOKEN }}
-          sonar_host_url: "https://sq.accuknox.com"
-          sonar_project_key: "spoc_test1"
+          sonar_host_url: "https://sonarcloud.io"
+          sonar_project_key: "azure-plugin-test"
+          sonar_organization_id: "r3d-shadow"
           accuknox_endpoint: "cspm.dev.accuknox.com"
           tenant_id: 19
           accuknox_token: ${{ secrets.ACCUKNOX_DEV_TOKEN }}
